@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const Users = require("../models/users");
-const { decode } = require("punycode");
 module.exports = catchAsync(async (req, res, next) => {
   let token;
   if (
