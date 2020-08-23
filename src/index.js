@@ -7,6 +7,7 @@ const globalError = require("./middlewares/error");
 const AppError = require("./utils/appError");
 const userRoutes = require("./routes/userRoutes");
 const contactRoutes = require("./routes/contactRoutes");
+const statisticsRoutes = require("./routes/statisticsRoutes");
 const app = express();
 
 app.use(express.json());
@@ -17,6 +18,8 @@ if (process.env.NODE_ENV === "development") {
 
 app.use("/api/users", userRoutes);
 app.use("/api/contacts", contactRoutes);
+app.use("/api/statistics", statisticsRoutes);
+
 app.all("*", (req, res, next) => {
   return next(new AppError("no route defined", 404));
 });
