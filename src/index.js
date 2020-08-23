@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const dbConnect = require("./utils/dbConnect");
 const globalError = require("./middlewares/error");
 const AppError = require("./utils/appError");
+const userRoutes = require("./routes/userRoutes");
 const app = express();
 
 app.use(express.json());
@@ -12,6 +13,8 @@ app.use(express.static(path.join(__dirname, "public")));
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+app.use("/api/users", userRoutes);
 app.all("*", (req, res, next) => {
   return next(new AppError("no route defined", 404));
 });
