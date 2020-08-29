@@ -10,6 +10,14 @@ const contactSchema = new mongoose.Schema({
     type: String,
     required: [true, "name is required"],
   },
+  status: {
+    type: String,
+    default: "untrash",
+    enum: {
+      values: ["untrash", "trash"],
+      message: "status must be either of untrash or trash",
+    },
+  },
   email: {
     type: String,
     validate: [validator.isEmail, "email is not correct"],
@@ -25,14 +33,7 @@ const contactSchema = new mongoose.Schema({
     type: String,
     required: [true, "phone is required"],
   },
-  role: {
-    type: String,
-    required: [true, "role is required"],
-  },
   address: String,
-  website: String,
-  facebook: String,
-  twitter: String,
 });
 
 const Contacts = mongoose.model("Contacts", contactSchema);

@@ -15,4 +15,3 @@ const upload = multer({
   storage: multerStorage,
 });
 exports.uploadPhoto = upload.single("photo");
-exports.uploadProfile = upload.single("profile");

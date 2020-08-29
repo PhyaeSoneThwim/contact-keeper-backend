@@ -28,9 +28,6 @@ const userSchema = new mongoose.Schema({
       message: "passwords are not the same",
     },
   },
-  profile: String,
-  bios: String,
-  website: String,
 });
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();

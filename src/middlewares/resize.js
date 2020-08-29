@@ -13,15 +13,3 @@ exports.resizePhoto = catchAsync(async (req, res, next) => {
   req.body.photo = filename;
   next();
 });
-
-exports.resizeProfile = catchAsync(async (req, res, next) => {
-  if (!req.file) return next();
-  const filename = `user-${faker.random.uuid()}-${Date.now()}.jpeg`;
-  await sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(`public/images/users/${filename}`);
-  req.body.profile = filename;
-  next();
-});
