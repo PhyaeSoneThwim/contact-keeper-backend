@@ -25,14 +25,7 @@ const contactSchema = new mongoose.Schema({
     lowercase: true,
     unique: true,
   },
-  photo: {
-    type: String,
-    default: "default.jpeg",
-  },
-  phone: {
-    type: String,
-    required: [true, "phone is required"],
-  },
+  phone: String,
   address: String,
 });
 

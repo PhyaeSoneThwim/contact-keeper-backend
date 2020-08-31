@@ -10,7 +10,8 @@ const contactRoutes = require("./routes/contactRoutes");
 const app = express();
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.get(express.static(`${__dirname}/public`));
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }

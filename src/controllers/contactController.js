@@ -9,7 +9,7 @@ exports.addContact = catchAsync(async (req, res, next) => {
   const contact = await Contacts.findOne({ email });
   if (contact) {
     return next(
-      new AppError("contact with requested email already exists", 409)
+      new AppError("Email already exits", 409)
     );
   }
   const newContact = await Contacts.create(
@@ -50,13 +50,6 @@ exports.getContact = catchAsync(async (req, res, next) => {
 });
 
 exports.updateContact = catchAsync(async (req, res, next) => {
-  const contact = await Contacts.findById(req.params.id);
-  if (!contact) {
-    return next(new AppError("no contact information", 404));
-  }
-  if (req.body.photo && contact.photo) {
-    unLink(`public/images/contacts/${contact.photo}`);
-  }
   const newContact = await Contacts.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
@@ -70,13 +63,6 @@ exports.updateContact = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteContact = catchAsync(async (req, res, next) => {
-  const contact = await Contacts.findById(req.params.id);
-  if (!contact) {
-    return next(new AppError("no contact information", 404));
-  }
-  if (contact.photo) {
-    unLink(`public/images/contacts/${contact.photo}`);
-  }
   await Contacts.findByIdAndDelete(req.params.id);
   res.status(200).json({
     status: "success",

@@ -7,12 +7,12 @@ const contactController = require("../controllers/contactController");
 router.use(protect);
 router
   .route("/")
-  .post(uploadPhoto, resizePhoto, contactController.addContact)
+  .post(contactController.addContact)
   .get(contactController.getContacts);
 
 router
   .route("/:id")
   .get(contactController.getContact)
-  .patch(uploadPhoto, resizePhoto, contactController.updateContact)
+  .patch(contactController.updateContact)
   .delete(contactController.deleteContact);
 module.exports = router;
